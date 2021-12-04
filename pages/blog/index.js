@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Divider, Button, Input } from "antd";
 import Link from "next/link";
+import Moment from "moment";
 
 const getblogList = async () => {
   const response = await axios.get(
@@ -76,7 +77,7 @@ export default function Blog() {
                 }}
                 key={d.id}
               >
-                <Link href="#">
+                <Link href={`/blog/${d.id}`}>
                   <a style={{ color: "#000", fontWeight: 500 }}>{d.title}</a>
                 </Link>
                 <div
@@ -86,8 +87,8 @@ export default function Blog() {
                     margin: ".5em 0",
                   }}
                 >
-                  <div style={{marginRight:'1em'}}>
-                    Author:{' '}
+                  <div style={{ marginRight: "1em" }}>
+                    Author:{" "}
                     <span
                       style={{
                         fontSize: "12px",
@@ -100,8 +101,8 @@ export default function Blog() {
                       {d.author}
                     </span>
                   </div>
-                  <div style={{marginRight:'1em'}}>
-                    Date:{' '}
+                  <div style={{ marginRight: "1em" }}>
+                    Date:{" "}
                     <span
                       style={{
                         fontSize: "12px",
@@ -111,7 +112,7 @@ export default function Blog() {
                         borderRadius: "5px",
                       }}
                     >
-                      {d.createdAt}
+                      {Moment(d.createdAt).startOf("hour").fromNow()}
                     </span>
                   </div>
                 </div>
